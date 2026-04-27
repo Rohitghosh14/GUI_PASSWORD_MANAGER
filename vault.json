@@ -1,0 +1,12 @@
+{
+    "passwords": [
+        {
+            "id": 1,
+            "account": "Gmail",
+            "username": "rohit@gamil.com",
+            "password": "gAAAAABpvXHq8VxVMUHb7QoGanXcWswyFLxTn_qsXd9DTYFaL_-Nb8BrDiYxohhlYCa2pj4jKfvI6aKp1Hq4BeBUdrcIuoGoJg==",
+            "data_added": "2026-03-20 21:42"
+        }
+    ],
+    "master_hash": "5d150f99ea842f65acb33d4d3c1808c4297927277787b5bfb80994d84883fc67"
+}
