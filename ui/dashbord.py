@@ -66,8 +66,8 @@ class Dashboard:
                         text="🔐  PASSWORD VAULT",
                         font=(FONT["family"], FONT["size_md"]),
                         text_color=COLORS["blue"],
-                ).pack(side="left", padx=16)       # side="left" → sticks to left side of header
-                
+                ).pack(side="left", padx=16)      
+
                 #--lOCK BUTTON(TOP RIGHT):
                 ctk.CTkButton(
                         header,
@@ -232,7 +232,7 @@ class Dashboard:
 
                 self.strength_segments = []
                 # list to hold all 5 segment frames
-                # we color them based on strength score
+                
 
                 for i in range(5):
                         # create 5 equal segments side by side
@@ -247,7 +247,7 @@ class Dashboard:
                         # side="left" → all 5 sit in a row left to right
                         # fill="x", expand=True → each takes equal width
                         self.strength_segments.append(seg)
-                        # add to list so we can color them later
+                        
 
 
         # ── FORM: ERROR + SAVE BUTTON 
@@ -309,7 +309,7 @@ class Dashboard:
                         # pack_forget() → hides widget without destroying it
                         # widget still exists in memory — just invisible
                         self.clear_form()
-                        # clear all input fields when form hides
+                        
 
 
 # ── CLEAR FORM 
@@ -319,7 +319,7 @@ class Dashboard:
                 self.account_input.delete(0, "end")
                 self.username_input.delete(0, "end")
                 self.new_pass_input.delete(0, "end")
-                # delete(0, "end") → deletes from position 0 to end
+                
                 # clears entire input field
 
                 self.strength_label.configure(text="")
@@ -360,9 +360,7 @@ class Dashboard:
         # update label text and color
 
                 for i, seg in enumerate(self.strength_segments):
-                        # enumerate() → gives index AND value
-                        # i = 0,1,2,3,4
-                        # seg = each segment frame
+
 
                         if i < score:
                                 seg.configure(fg_color=color)

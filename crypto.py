@@ -43,12 +43,12 @@ def check_password_strength(password: str) -> tuple:
         score += 1
 
     if any(c.isupper() for c in password):  #any() → returns True if at least ONE character passes
-        score+=1                            # c.isupper() → checks if character is uppercase
+        score+=1                            
 
-    if any(c.islower() for c in password):       # same idea as uppercase
+    if any(c.islower() for c in password):       
         score+=1
 
-    if any(c.isdigit() for c in password):      # c.isdigit() → checks if character is 0-9
+    if any(c.isdigit() for c in password):     
         score+=1
 
     special = "!@#$%^&*()_+=-[]{}|:;,.?<>"
@@ -68,7 +68,7 @@ def check_password_strength(password: str) -> tuple:
         return(score, "STRONG" , "#00FF88")
         # 4-5 rules passed → green → great password!
 
-# ── ADD FUNCTION 6: hash_master_key() ──────────────────
+# ── ADD FUNCTION 6: hash_master_key() 
 def hash_master_key(master: str) -> str:
     # converts master password → fixed hash string
     # ONE WAY → can never reverse it to get original password
@@ -81,7 +81,7 @@ def hash_master_key(master: str) -> str:
     # example: "rohit123" → "a665a45920422f..."  (always same!)
 
 
-# ── ADD FUNCTION 7: verify_master_key() ────────────────
+# ── ADD FUNCTION 7: verify_master_key() 
 def verify_master_key(master: str, stored_hash: str) -> bool:
     # checks if what user typed matches the stored hash
     # returns True  → correct password → let them in

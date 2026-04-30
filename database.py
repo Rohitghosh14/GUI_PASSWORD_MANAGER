@@ -1,47 +1,43 @@
-import json                         #json.dump()  → converts Python dictionary → JSON file / json.load()  → reads JSON file → Python dictionary
-import os                           # os.path.exists() → checks if file exists before opening & prevents FileNotFoundError crash on first run
+import json                         
+import os                           
 from datetime import datetime
 import hashlib
 
 
 # ── FILE NAME:
-DB_FILE = "vault.json"              #JSON file where all passwords are stored
+DB_FILE = "vault.json"              
 
 # ── FUNCTION 1: load_data()
-def load_data() -> dict:                 # reads the JSON file and returns all data as a dictionary
+def load_data() -> dict:                 
     if not os.path.exists(DB_FILE):      # os.path.exists() → checks if vault.json is on disk
         return {"passwords":[]}
     
 
     with open(DB_FILE,"r") as f:
 
-        return json.load(f)             #reads JSON file → converts to Python dict
+        return json.load(f)             
     
 
 # ── FUNCTION 2: save_data():
-def save_data(data: dict):              #takes data dictionary and saves it to JSON file
-    with open(DB_FILE,"w") as f:        # json.dump() → converts Python dict → JSON text → writes to file
-        json.dump(data, f, indent=4)    #makes the JSON file nicely formatted / with indent=4  → clean readable structure
+def save_data(data: dict):              
+    with open(DB_FILE,"w") as f:       
+        json.dump(data, f, indent=4)    
 
 
 # ── FUNCTION 3: get_all_passwords():
 
-def get_all_passwords() -> list:         # used by dashboard to show all passwords on screen
-
+def get_all_passwords() -> list:         
     data = load_data()
-    return data["passwords"]             # data["passwords"] → extracts just the list
+    return data["passwords"]            
 
 # ── FUNCTION 4: add_password():
 
 def add_password(account: str, username: str, encrypted_password: str):
 
-    data = load_data()          #load existing data first / we need to ADD to it, not replace it
-    passwords = data["passwords"]       # extract just the list for easier working
+    data = load_data()          
+    passwords = data["passwords"]       
 
     new_id = len(passwords)+1
-    # generate a simple ID for this entry
-    # if 0 entries exist → id = 1
-    # if 3 entries exist → id = 4
 
     new_entry = {
         "id":       new_id,
@@ -54,7 +50,6 @@ def add_password(account: str, username: str, encrypted_password: str):
         # email or username for that account
 
         "password":     encrypted_password,
-        # ENCRYPTED password string → never plain text here!
         # looks like: "gAAAAABhxyz123..."
 
         "data_added": datetime.now().strftime("%Y-%m-%d %H:%M"),
@@ -63,15 +58,15 @@ def add_password(account: str, username: str, encrypted_password: str):
         # "%Y-%m-%d %H:%M" → "2024-01-15 10:30"
     }
     passwords.append(new_entry)
-    # .append() → adds new entry to end of the list
+    
 
     save_data(data)
-    # save updated data back to JSON file
+    
 
 # ── FUNCTION 5: delete_password()
 def delete_password(entry_id: int):
 
-    data = load_data()          # load current data
+    data = load_data()          
 
     data["passwords"] = [
         p for p in data["passwords"] if p["id"] != entry_id
@@ -82,9 +77,9 @@ def delete_password(entry_id: int):
 # ── FUNCTION 6: search_passwords()
 def search_passwords(query: str) -> list:
     
-    all_passwords = get_all_passwords()           # get full list first
+    all_passwords = get_all_passwords()           
 
-    query = query.lower()                          # .lower() → converts search to lowercase
+    query = query.lower()                          
 
 
     return[ p for p in all_passwords if query in p["account"].lower() 
@@ -94,7 +89,7 @@ def search_passwords(query: str) -> list:
     # p["account"].lower() → "Gmail" becomes "gmail"
     # query in "gmail"     → True if "gm" is inside "gmail"
 
-# FUNCTION 7: is_vault_setup()
+# ── FUNCTION 7: is_vault_setup()
 
 
 def is_vault_setup() -> bool:
@@ -113,7 +108,7 @@ def is_vault_setup() -> bool:
 
 
 
-#  FUNCTION 8: setup_master_key()
+# ── FUNCTION 8: setup_master_key()
 
 
 def setup_master_key(master: str):
@@ -138,7 +133,7 @@ def setup_master_key(master: str):
     # }
 
 
-#  FUNCTION 9: check_master_key()
+# ── FUNCTION 9: check_master_key()
 
 def check_master_key(master: str) -> bool:
     # called on EVERY login attempt after first run

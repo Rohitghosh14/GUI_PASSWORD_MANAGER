@@ -35,8 +35,7 @@ class LoginScreen:
                         text_color=COLORS["gold"]
                 )
                 icon_label.pack(pady=(60,0))
-                # pady=(60, 0) → 60px space ABOVE, 0px space below
-                # pushes content down from top of window
+                
 
                 # ── TITLE TEXT:
                 title_label =ctk.CTkLabel(
@@ -46,11 +45,8 @@ class LoginScreen:
                         text_color=COLORS["blue"]
                 )
                 title_label.pack(pady=(10,0))
-                # pady=(10, 0) → 10px above, 0px below
-
-                # ── SUBTITLE TEXT:
-                # ── SUBTITLE  ← changes text based on first run or not
-                # ✅ NEW: show different message on first run vs normal login
+                
+                
                 if is_vault_setup():
                         subtitle_text = "ENTER MASTER KEY TO CONTINUE"
                 else:
@@ -63,7 +59,7 @@ class LoginScreen:
                         text_color=COLORS["white_dim"]
                 )
                 subtitle_label.pack(pady=(4,30))
-                # pady=(4, 30) → 4px above, 30px below (gap before input)
+                
 
                 # ── INPUT CONTAINER FRAME 
                 input_frame = ctk.CTkFrame(
@@ -91,7 +87,6 @@ class LoginScreen:
                 )
                 self.key_input.grid(row=0, column=0 ,padx=(0,6))
                 # .grid() → places widget in a grid layout
-                # row=0, column=0 → first row, first column
                 # padx=(0, 6) → 0px left, 6px right (gap before eye button)
 
                 self.key_input.bind("<Return>",lambda e: self.attempt_login())
@@ -101,7 +96,6 @@ class LoginScreen:
 
                 # ── SHOW/HIDE TOGGLE BUTTON:
                 self.show_password = False
-                # tracks whether password is visible or hidden
                 # False = hidden (dots) by default
 
                 self.eye_btn = ctk.CTkButton(
@@ -120,7 +114,7 @@ class LoginScreen:
                 # toggle_password → shows/hides the master key
 
                 self.eye_btn.grid(row=0,column=1)
-                # column=1 → sits RIGHT of the input field
+                
 
                 # ── ERROR MESSAGE LABEL:
                 self.error_label = ctk.CTkLabel(
@@ -200,10 +194,10 @@ class LoginScreen:
                 # .strip() → removes accidental spaces at start/end
                 if not master:
                         self.error_label.configure(text="⚠ PLEASE ENTER MASTER KEY")
-                        return                          # return → stop here, don't try to login
+                        return                          
                 
 
-                # ── FIRST RUN: no vault set up yet ──────
+                # ── FIRST RUN: no vault set up yet 
                 if not is_vault_setup():
                         # is_vault_setup() → False means first time ever
                         # we trust whatever they type → save it as master key
@@ -223,7 +217,7 @@ class LoginScreen:
                         self.on_success(fer)            # open dashboard
                         return
 
-                # ── NORMAL LOGIN: vault already set up ──
+                # ── NORMAL LOGIN: vault already set up 
                 if not check_master_key(master):
                         # check_master_key() → hashes input → compares with stored hash
                         # False = wrong password → reject!
@@ -231,7 +225,7 @@ class LoginScreen:
                         return
                         # frame NOT destroyed → user stays and tries again
 
-                # ── SUCCESS: correct password ────────────
+                # ── SUCCESS: correct password 
                 self.error_label.configure(text="")
                 fer = get_fernet(master)            # create encryption engine with correct key
                 self.frame.destroy()               # close login screen

@@ -2,11 +2,11 @@
     "passwords": [
         {
             "id": 1,
-            "account": "Gmail",
-            "username": "rohit@gamil.com",
-            "password": "gAAAAABpvXHq8VxVMUHb7QoGanXcWswyFLxTn_qsXd9DTYFaL_-Nb8BrDiYxohhlYCa2pj4jKfvI6aKp1Hq4BeBUdrcIuoGoJg==",
-            "data_added": "2026-03-20 21:42"
+            "account": "insta",
+            "username": "rohit_ghosh",
+            "password": "gAAAAABp886MUCuStscMxHklRIvBBIwTCebFxBTtMqJmCAlmxlC-31ZrZgLxwA3oFod93qzvOtNMIyOAwQ1i7r4N-Eg_kU2OsA==",
+            "data_added": "2026-05-01 03:20"
         }
     ],
-    "master_hash": "5d150f99ea842f65acb33d4d3c1808c4297927277787b5bfb80994d84883fc67"
+    "master_hash": "c1e5b0bb4375160f7f9a53bdb2a0b8dbbb02e317cb5c0f5c0f7a06ef73072e7b"
 }
